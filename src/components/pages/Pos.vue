@@ -34,6 +34,7 @@
       <el-col :span="17">
         <div class="often-goods">
           <div class="title">热销商品</div>
+          <div></div>
           <div class="often-good-list">
             <ul>
               <li v-for="goods in oftenGoods" @click="addOrderList(goods)">
