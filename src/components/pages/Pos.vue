@@ -1,24 +1,39 @@
 <template>
-  <div class="pos">
+  <el-row class="pos">
     <el-row>
-      <el-col :span="7" id="order-list">
+      <el-col :span="7"
+              id="order-list">
         <el-tabs>
           <el-tab-pane label="点餐">
-            <el-table stripe border style="width: 100%" :data="tableData">
-              <el-table-column prop="goodsName" label="商品"></el-table-column>
-              <el-table-column prop="price" label="价格"></el-table-column>
-              <el-table-column prop="count" label="地址"></el-table-column>
-              <el-table-column label="操作" fixed="right" width="150px">
+            <el-table stripe
+                      border
+                      style="width: 100%"
+                      :data="tableData">
+              <el-table-column prop="goodsName"
+                               label="商品"></el-table-column>
+              <el-table-column prop="price"
+                               label="价格"></el-table-column>
+              <el-table-column prop="count"
+                               label="地址"></el-table-column>
+              <el-table-column label="操作"
+                               fixed="right"
+                               width="150px">
                 <template scope="scope">
-                  <el-button type="text" size="medium" @click="delSinfleGoods(scope.row)">删除</el-button>
-                  <el-button type="text" size="medium" @click="addOrderList(scope.row)">增加</el-button>
+                  <el-button type="text"
+                             size="medium"
+                             @click="delSinfleGoods(scope.row)">删除</el-button>
+                  <el-button type="text"
+                             size="medium"
+                             @click="addOrderList(scope.row)">增加</el-button>
                 </template>
               </el-table-column>
             </el-table>
             <el-row style="margin-top:30px">
               <el-button type="warning">挂单</el-button>
-              <el-button type="danger" @click="delAllGoods">删除</el-button>
-              <el-button type="success" @click="checkout">结账</el-button>
+              <el-button type="danger"
+                         @click="delAllGoods">删除</el-button>
+              <el-button type="success"
+                         @click="checkout">结账</el-button>
             </el-row>
             <div class="totalDiv">
               <small>数量</small>
@@ -34,9 +49,11 @@
       <el-col :span="17">
         <div class="often-goods">
           <div class="title">热销商品</div>
+          <div></div>
           <div class="often-good-list">
             <ul>
-              <li v-for="goods in oftenGoods" @click="addOrderList(goods)">
+              <li v-for="goods in oftenGoods"
+                  @click="addOrderList(goods)">
                 <span>{{goods.goodsName}}</span>
                 <span class="o-price">￥{{goods.price}}元</span>
               </li>
@@ -47,9 +64,11 @@
           <el-tabs>
             <el-tab-pane label="汉堡">
               <ul class="cookList">
-                <li v-for="goods in type0Goods" @click="addOrderList(goods)">
+                <li v-for="goods in type0Goods"
+                    @click="addOrderList(goods)">
                   <span class="foodImg">
-                    <img :src="goods.goodsImg" width="100%">
+                    <img :src="goods.goodsImg"
+                         width="100%">
                   </span>
                   <span class="foodName">{{goods.goodsName}}</span>
                   <span class="foodPrice">￥{{goods.price}}元</span>
@@ -63,12 +82,12 @@
         </div>
       </el-col>
     </el-row>
-  </div>
+  </el-row>
 </template>
 <script>
 export default {
   name: 'Pos',
-  data() {
+  data () {
     return {
       tableData: [],
       totalCount: '',
@@ -199,13 +218,13 @@ export default {
       ]
     }
   },
-  mounted: function() {
+  mounted: function () {
     var orderHeight = document.body.clientHeight
     document.getElementById('order-list').style.height = orderHeight + 'px'
   },
   methods: {
     //添加订单列表的方法
-    addOrderList(goods) {
+    addOrderList (goods) {
       this.totalCount = 0
       this.totalMoney = 0
       let isHave = false
@@ -235,13 +254,13 @@ export default {
       //进行数量和价格的计算
       this.getAllMoney()
     },
-    delSinfleGoods(goods) {
+    delSinfleGoods (goods) {
       console.log(goods)
       this.tableData = this.tableData.filter(o => o.goodsId != goods.goodsId)
       this.getAllMoney()
     },
     //汇总金额
-    getAllMoney() {
+    getAllMoney () {
       this.totalCount = 0
       this.totalMoney = 0
       if (this.tableData) {
@@ -251,12 +270,12 @@ export default {
         })
       }
     },
-    delAllGoods() {
+    delAllGoods () {
       this.tableData = []
       this.totalCount = 0
       this.totalMoney = 0
     },
-    checkout() {
+    checkout () {
       if (this.tableData != 0) {
         this.tableData = []
         this.totalCount = 0
